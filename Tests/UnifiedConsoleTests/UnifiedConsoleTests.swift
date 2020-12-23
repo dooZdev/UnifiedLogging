@@ -3,9 +3,11 @@ import XCTest
 
 final class UnifiedConsoleTests: XCTestCase {
     func test_stubs() {
+        #if os(macOS) || os(Linux) || os(Windows)
         let console = NoLogConsole()
-        let logger = NoLogs()
         console.clear(.line)
+        #endif
+        let logger = NoLogs()
         logger.logLevel = .debug
         
         XCTAssert(true)

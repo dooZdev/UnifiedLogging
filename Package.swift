@@ -12,35 +12,19 @@ let package = Package(
             name: "UnifiedConsole",
             targets: ["UnifiedConsole"]),
     ],
-    dependencies: {
-        var dependencies: [Package.Dependency] = [
+    dependencies: [
+            // Used for android and the rest
             .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
-        ]
-        
-        #if os(macOS) || os(Linux) || os(Windows)
-        dependencies.append(
-            // Swift logging API with colored output
+            // Swift logging API with colored output, only used on windows, macOS and linux
             .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.2.4"))
-        )
-        #endif
-        return dependencies
-    }(),
+        ],
     targets: [
         .target(
             name: "UnifiedConsole",
-            dependencies: {
-                var dependencies = [Target.Dependency]()
-                
-                #if os(macOS) || os(Linux) || os(Windows)
-                dependencies.append(
-                    // Swift logging API with colored output
-                    .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.2.4"))
-                )
-                #else
-                
-                #endif
-            }()
-                
+            dependencies:[
+                .product(name: "ConsoleKit", package: "console-kit", condition: .when(platforms: [.macOS, .linux, .windows])),
+                .product(name: "Logging", package: "swift-log", condition: .when(platforms: [.iOS, .android]))
+            ]
         ),
         .testTarget(
             name: "UnifiedConsoleTests",
