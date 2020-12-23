@@ -1,8 +1,3 @@
-
-#if os(macOS) || os(Linux) || os(Windows)
-// use ConsoleKit
-#else
-
 import Foundation
 import Logging
 
@@ -136,4 +131,3 @@ extension Logger.Level {
         }
     }
 }
-#endif

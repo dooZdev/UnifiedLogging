@@ -8,9 +8,8 @@ let package = Package(
     platforms: [.macOS(.v10_15)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "UnifiedConsole",
-            targets: ["UnifiedConsole"]),
+        .library(name: "UnifiedConsole", targets: ["UnifiedConsole"]),
+        .library(name: "UnifiedLogging", targets: ["UnifiedLogging"]),
     ],
     dependencies: [
             // Used for android and the rest
@@ -22,10 +21,12 @@ let package = Package(
         .target(
             name: "UnifiedConsole",
             dependencies:[
+                .target(name: "UnifiedLogging", condition: .when(platforms: [.android, .iOS])),
                 .product(name: "ConsoleKit", package: "console-kit", condition: .when(platforms: [.macOS, .linux, .windows])),
-                .product(name: "Logging", package: "swift-log", condition: .when(platforms: [.iOS, .android]))
             ]
         ),
+        // To be used on iOS/Android in Xcode until Xcode supports conditional dependencies
+        .target(name: "UnifiedLogging", dependencies: [.product(name: "Logging", package: "swift-log")]),
         .testTarget(
             name: "UnifiedConsoleTests",
             dependencies: ["UnifiedConsole"]),
