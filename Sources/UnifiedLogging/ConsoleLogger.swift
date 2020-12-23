@@ -1,6 +1,20 @@
 import Foundation
 import Logging
 
+public var consoleLoggerLabel: String = "spmpipes.com.logger"
+
+public struct Log: Console {
+    public func output(_ text: @autoclosure () -> String) {
+        print(text())
+    }
+}
+public var console: Console = Log()
+
+public var logger: Logging.LogHandler = {
+    LoggingSystem.bootstrap(console: console)
+    return ConsoleLogger(label: consoleLoggerLabel, console: console)
+}()
+
 public protocol Console {
     func output(_ text: @autoclosure () -> String)
 }

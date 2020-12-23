@@ -7,8 +7,9 @@ let package = Package(
     name: "UnifiedConsole",
     platforms: [.macOS(.v10_15)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
+        // As xcode does not do well with conditional imports use UnifiedLogging for iOS/android targets
         .library(name: "UnifiedConsole", targets: ["UnifiedConsole"]),
+        // Usable on all platforms but included in UnifiedConsole if ran on macOS, linux or windows.
         .library(name: "UnifiedLogging", targets: ["UnifiedLogging"]),
     ],
     dependencies: [
