@@ -1,12 +1,8 @@
 import XCTest
-@testable import UnifiedConsole
+@testable import UnifiedLogging
 
-final class UnifiedConsoleTests: XCTestCase {
+final class UnifiedLoggingTests: XCTestCase {
     func test_stubs() {
-        #if os(macOS) || os(Linux) || os(Windows)
-        let console = NoLogConsole()
-        console.clear(.line)
-        #endif
         let logger = NoLogs()
         logger.logLevel = .debug
         

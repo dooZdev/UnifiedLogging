@@ -4,32 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "UnifiedConsole",
+    name: "UnifiedLogging",
     platforms: [.macOS(.v10_15)],
     products: [
-        // As xcode does not do well with conditional imports use UnifiedLogging for iOS/android targets
-        .library(name: "UnifiedConsole", targets: ["UnifiedConsole"]),
-        // Usable on all platforms but included in UnifiedConsole if ran on macOS, linux or windows.
         .library(name: "UnifiedLogging", targets: ["UnifiedLogging"]),
     ],
     dependencies: [
             // Used for android and the rest
-            .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
-            // Swift logging API with colored output, only used on windows, macOS and linux
-            .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.2.4"))
+            .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
         ],
     targets: [
-        .target(
-            name: "UnifiedConsole",
-            dependencies:[
-                .target(name: "UnifiedLogging", condition: .when(platforms: [.android, .iOS])),
-                .product(name: "ConsoleKit", package: "console-kit", condition: .when(platforms: [.macOS, .linux, .windows])),
-            ]
-        ),
-        // To be used on iOS/Android in Xcode until Xcode supports conditional dependencies
         .target(name: "UnifiedLogging", dependencies: [.product(name: "Logging", package: "swift-log")]),
         .testTarget(
-            name: "UnifiedConsoleTests",
-            dependencies: ["UnifiedConsole"]),
+            name: "UnifiedLoggingTests",
+            dependencies: ["UnifiedLogging"]),
     ]
 )

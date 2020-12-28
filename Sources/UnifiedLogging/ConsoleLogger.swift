@@ -145,3 +145,18 @@ extension Logger.Level {
         }
     }
 }
+
+/// Useable in tests via `@testable import UnifiedLogging`
+class NoLogs: Logging.LogHandler {
+    subscript(metadataKey _: String) -> Logger.Metadata.Value? {
+        get {
+            return nil
+        }
+        set(newValue) {
+            
+        }
+    }
+    
+    var metadata: Logger.Metadata = [:]
+    var logLevel: Logger.Level = .debug
+}

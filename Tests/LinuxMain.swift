@@ -1,8 +1,8 @@
 import XCTest
 
-import UnifiedConsoleTests
+import UnifiedLoggingTests
 
 var tests = [XCTestCaseEntry]()
-tests += UnifiedConsoleTests.__allTests()
+tests += UnifiedLoggingTests.__allTests()
 
 XCTMain(tests)
