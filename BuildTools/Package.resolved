@@ -12,7 +12,7 @@
       },
       {
         "package": "SPMPipes",
-        "repositoryURL": "https://github.com/dooZdev/SPMPipes.git",
+        "repositoryURL": "https://9db2882a49801b2d995c26b5c68c4e2da2aa9db9:x-oauth-basic@github.com/dooZdev/SPMPipes.git",
         "state": {
           "branch": null,
           "revision": "39c16a464c9160d34ba51e66eeead8f072ed354e",

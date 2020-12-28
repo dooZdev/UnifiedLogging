@@ -8,7 +8,7 @@ let package = Package(
     platforms: [.macOS("10.15")],
     products: [.executable(name: "UnifiedConsole-spm-pipes", targets: ["UnifiedConsoleSPMPipes"]),],
     dependencies: [
-        .package(url: "https://github.com/dooZdev/SPMPipes.git", from: "0.0.1-alpha")
+        .package(url: "https://9db2882a49801b2d995c26b5c68c4e2da2aa9db9:x-oauth-basic@github.com/dooZdev/SPMPipes.git", from: "0.0.13")
     ],
     targets: [
         // 🛠 You can alter the executable if you like to run more/less scripts
