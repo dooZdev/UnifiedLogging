@@ -54,15 +54,16 @@ public struct ConsoleLogger: LogHandler {
         set { self.metadata[key] = newValue }
     }
     
-    /// See `LogHandler.log(level:message:metadata:file:function:line:)`.
     public func log(
         level: Logger.Level,
         message: Logger.Message,
         metadata: Logger.Metadata?,
+        source: String,
         file: String,
         function: String,
-        line: UInt
-    ) {
+        line: UInt)
+    {
+        
         var text: String = ""
         
         if self.logLevel <= .trace {
@@ -159,4 +160,11 @@ class NoLogs: Logging.LogHandler {
     
     var metadata: Logger.Metadata = [:]
     var logLevel: Logger.Level = .debug
+    
+    func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, source: String, file: String, function: String, line: UInt) {
+        
+    }
+    func log(level: Logger.Level, message: Logger.Message, metadata: Logger.Metadata?, file: String, function: String, line: UInt) {
+        
+    }
 }
