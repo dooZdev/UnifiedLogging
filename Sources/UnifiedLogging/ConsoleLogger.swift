@@ -10,9 +10,9 @@ public struct Log: Console {
 }
 public var console: Console = Log()
 
-public var logger: Logging.LogHandler = {
+public var logger: Logger = {
     LoggingSystem.bootstrap(console: console)
-    return ConsoleLogger(label: consoleLoggerLabel, console: console)
+    return Logging.Logger(label: "UnifiedLogging.default")
 }()
 
 public protocol Console {
